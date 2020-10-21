@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+  padding: 3rem 0 2rem 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.input-section {
+  margin: 1rem auto;
+  width: fit-content;
+}
+
+.input-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  overflow: hidden;
+  margin: 3rem 0;
+  border-radius: 2rem;
+  box-shadow: 0.2rem 0.2rem 0.5rem slategray;
+}
+
+input {
+  border: none;
+  text-align: center;
+  height: 100%;
+  width: 12rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  /* margin: 1rem auto; */
+}
+
+input:focus,
+button:focus {
+  outline: none;
+}
+
+button {
+  border: none;
+  /* border-radius: 1rem; */
+  width: 8rem;
+  height: 100%;
+  font-size: 1em;
+  color: white;
+  background-color: #4d4d4d;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.result-section {
+  border-radius: 4rem;
+  overflow: hidden;
+  width: 90%;
+  margin: 3em auto;
+  box-shadow: 0.3rem 0.3rem 0.5rem slategray;
+}
+
+.friend-tab {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: violet;
+  width: 100%;
+  height: 5rem;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.tab-name {
+  width: 20%;
+  height: 100%;
+  background-color: white;
+}
+
+.tab-content {
+  width: 80%;
+  height: 100%;
+  padding: 0 1.2rem;
+  background-color: pink;
+}
+
+.tab-name,
+.tab-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (min-width: 800px) {
+  .result-section {
+    width: 70%;
+  }
+}
