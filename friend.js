@@ -5,7 +5,7 @@ const shufflebtn = document.querySelector('button');
 const numInput = document.querySelector('input');
 
 let all14 = ['김정식', '김태현', '김병준', '김기용', '박영준', '김영환', '정현석', '공주민', '안혜수', '김영주', '박승제', '심원두', '김현지', '신세원', '백승찬', '류지혜', '장규석', '박현재'
-            ,'엄문주','백승진','안상혁','강두연','고수희','김민구','이민영','고은정','이승윤','김민서','장재원','이영주','신재훈','김동하','장호철','이영보'];
+            ,'엄문주','백승진','안상혁','강두연','고수희','김민구','이민영','고은정','이승윤','김민서','장재원','이영주','신재훈','김동하','장호철','이성보'];
 let prev_friends = lstorage.getItem(storageKey);
 
 function shuffleFriends(){
@@ -41,7 +41,7 @@ function shuffleFriends(){
     }
     else{
         let idx = 0;
-        for(let i = 0; i < all14.length/member_count; i++){
+        for(let i = 0; i < Math.floor(all14.length/member_count); i++){
             let tmparr = [];
             for(let j = i * (member_count-1); j < (i+1) * (member_count-1); j++){
                 tmparr.push(all14[idx]);
@@ -49,11 +49,14 @@ function shuffleFriends(){
             }
             next_friends.push(tmparr);
         }
+        console.log('idx : ' + idx);
+        console.log(next_friends);
         for(let i = 0; i < next_friends.length; i++){
             if(idx >= all14.length) break;
             next_friends[i].push(all14[idx]);
             idx+=1;
         }
+        console.log(next_friends);
     }
     addFriendTab(next_friends);
 }

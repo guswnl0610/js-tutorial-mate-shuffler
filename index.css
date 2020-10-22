@@ -92,7 +92,13 @@ button:hover {
   align-items: center;
 }
 
-@media only screen and (min-width: 800px) {
+/* @media only screen and (min-width: 800px) {
+  .result-section {
+    width: 70%;
+  }
+} */
+
+@media screen and (min-width: 800px) {
   .result-section {
     width: 70%;
   }
