@@ -11,16 +11,8 @@ let prev_friends = lstorage.getItem(storageKey);
 function shuffleFriends(){
     let next_friends = [];
     const member_count = numInput.value;
-    if(!member_count){
-        alert('팀 멤버 수를 입력해주세요');
-        return;
-    }
-    else if(member_count <= 0){
-        alert('양의 정수를 입력해주세요');
-        return;
-    }
-    else if(member_count > all14.length){
-        alert('팀원의 수가 너무 많습니다.');
+    if(!member_count || member_count <= 0 || member_count > all14.length){
+        alert('입력이 올바르지 않습니다!');
         return;
     }
     //shuffle
@@ -28,7 +20,7 @@ function shuffleFriends(){
         return .5 - Math.random();
     });
     
-    //팀원 수가 과반일경우
+    //입력한 팀원 수가 과반일경우 그냥 반으로 나눔..ㅎㅎ
     if(member_count >= all14.length/2){
         let idx = all14.length/2;
         for(let j = 0; j < 2; j++){
@@ -41,22 +33,38 @@ function shuffleFriends(){
     }
     else{
         let idx = 0;
-        for(let i = 0; i < Math.floor(all14.length/member_count); i++){
+        //팀 별 팀원 차이가 2명 이상인 경우 최대한 밸런스에 맞게 팀원 배분
+        if(member_count - (all14.length % member_count) <= 1){
+            const teamcnt = Math.floor(all14.length / member_count) + 1;
+            for(let i = 0; i < teamcnt-1; i++){
+                let tmparr = all14.slice(i * member_count, (i+1) * member_count);
+                next_friends.push(tmparr);
+            }
             let tmparr = [];
-            for(let j = i * (member_count-1); j < (i+1) * (member_count-1); j++){
-                tmparr.push(all14[idx]);
-                idx+=1;
+            for(let i = member_count * (teamcnt-1); i < all14.length; i++){
+                tmparr.push(all14[i]);
             }
             next_friends.push(tmparr);
         }
-        console.log('idx : ' + idx);
-        console.log(next_friends);
-        for(let i = 0; i < next_friends.length; i++){
-            if(idx >= all14.length) break;
-            next_friends[i].push(all14[idx]);
-            idx+=1;
+        else{
+            const teamcnt = Math.floor(all14.length / member_count);
+            let index = 0;
+            for(let tidx = 0; tidx < teamcnt; tidx++){
+                let tmparr = [];
+                for(let i = 0; i < member_count-1; i++){
+                    tmparr.push(all14[index]);
+                    index++;
+                }
+                next_friends.push(tmparr);
+            }
+            while(index < all14.length){
+                for(let tidx = 0; tidx < teamcnt; tidx++){
+                    next_friends[tidx].push(all14[index]);
+                    index++;
+                    if(index >= all14.length) break;
+                }
+            }
         }
-        console.log(next_friends);
     }
     addFriendTab(next_friends);
 }
@@ -91,5 +99,10 @@ function addbtnEventlistener(){
 function init(){
     addbtnEventlistener();
 }
+
+//To do : 
+//1. 균등분배 말고 그냥 자르는 것도 선택하도록 하기
+//2. 로컬스토리지 이용해서 이전에 나온결과 저장하기
+//3. input에 focus된 상태에서 엔터 눌렀을때 버튼클릭이벤트처럼 작동하도록 하기
 
 init();
