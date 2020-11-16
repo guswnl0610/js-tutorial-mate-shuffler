@@ -8,6 +8,14 @@ let all14 = ['김정식', '김태현', '김병준', '김기용', '박영준', '�
             ,'엄문주','백승진','안상혁','강두연','고수희','김민구','이민영','고은정','이승윤','김민서','장재원','이영주','신재훈','김동하','장호철','이성보'];
 let prev_friends = lstorage.getItem(storageKey);
 
+const shuffleArr = (prevarr) => {
+    for(let i = prevarr.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [prevarr[i], prevarr[j]] = [prevarr[j], prevarr[i]];
+    }
+    return prevarr;
+}
+
 function shuffleFriends(){
     let next_friends = [];
     const member_count = numInput.value;
@@ -16,9 +24,11 @@ function shuffleFriends(){
         return;
     }
     //shuffle
-    all14.sort(()=>{
-        return .5 - Math.random();
-    });
+    all14 = shuffleArr(all14);
+
+    // all14.sort(()=>{
+    //     return .5 - Math.random();
+    // });
     
     //입력한 팀원 수가 과반일경우 그냥 반으로 나눔..ㅎㅎ
     if(member_count >= all14.length/2){
@@ -33,7 +43,7 @@ function shuffleFriends(){
     }
     else{
         let idx = 0;
-        //팀 별 팀원 차이가 2명 이상인 경우 최대한 밸런스에 맞게 팀원 배분
+        //팀 별 팀원 차이가 2명 이상인 경우 밸런스에 맞게 팀원 배분
         if(member_count - (all14.length % member_count) <= 1){
             const teamcnt = Math.floor(all14.length / member_count) + 1;
             for(let i = 0; i < teamcnt-1; i++){
