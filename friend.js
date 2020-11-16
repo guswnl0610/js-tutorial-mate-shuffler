@@ -25,10 +25,6 @@ function shuffleFriends(){
     }
     //shuffle
     all14 = shuffleArr(all14);
-
-    // all14.sort(()=>{
-    //     return .5 - Math.random();
-    // });
     
     //입력한 팀원 수가 과반일경우 그냥 반으로 나눔..ㅎㅎ
     if(member_count >= all14.length/2){
